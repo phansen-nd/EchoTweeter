@@ -4,7 +4,7 @@
 # 11/29/16
 # bot.py - a Python script to run a Twitter bot.
 
-import tweepy, time, sys, json
+import tweepy, time, sys, json, os
 from keys import keys
 from random import randint
 from datetime import datetime
@@ -82,4 +82,13 @@ if __name__ == "__main__":
     # Set up listener.
     listener = UserStreamListener(api, tweets, user_id)
     stream = tweepy.Stream(auth, listener)
-    stream.filter(follow=[user_id]) # can add aync=True option
+
+    # Start streaming and exit gracefully if asked.
+    try:
+        stream.filter(follow=[user_id]) # can add aync=True option
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
