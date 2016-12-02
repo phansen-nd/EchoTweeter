@@ -87,7 +87,7 @@ if __name__ == "__main__":
     try:
         stream.filter(follow=[user_id]) # can add aync=True option
     except KeyboardInterrupt:
-        print('Interrupted')
+        print(" <<<Interrupted>>> - don't do this too often or Twitter will become upset.")
         try:
             sys.exit(0)
         except SystemExit:
